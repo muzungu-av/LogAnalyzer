@@ -32,4 +32,7 @@ export class Service {
 }
 ```
 
+## Результат измерений в SQLite
+
+![таблица с измерениями](performance.png)
 
