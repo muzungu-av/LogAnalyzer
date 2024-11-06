@@ -53,7 +53,7 @@ export function TimeTrack(
       const result = await originalMethod.apply(this, args);
 
       const endTime = Date.now();
-      const duration = (startTime - endTime) / 1000;
+      const duration = (endTime - startTime) / 1000;
 
       // information about the previous calling method
       const caller = previousCaller || {
