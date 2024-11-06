@@ -1,0 +1,66 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Server",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "pkg": {
+    "scripts": "dist/**/*.js",
+    "assets": [
+      "public/*",
+      "src/build/**/*",
+      "src/utils/**/*",
+      "dist/**/*",
+      "./env.production"
+    ],
+    "targets": [
+      "node16-win-x64"
+    ],
+    "outputPath": "dist-packaged"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production npx tsc",
+    "postbuild": "copyfiles .env.production dist/",
+    "start": "cross-env NODE_ENV=production node dist/index.js"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.1",
+    "@types/winston": "^2.4.4",
+    "cls-hooked": "^4.2.2",
+    "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fs-extra": "^9.0.1",
+    "inversify": "^6.0.1",
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "uniqid": "^5.2.0",
+    "winston": "^3.15.0",
+    "winston-sqlite3": "^1.1.1",
+    "worker-thread": "^1.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.37.0",
+    "@types/cls-hooked": "^4.3.9",
+    "@types/cors": "^2.8.17",
+    "@types/fs-extra": "^11.0.4",
+    "@types/helmet": "^4.0.0",
+    "@types/morgan": "^1.9.9",
+    "@types/uniqid": "^5.3.4",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "globals": "^15.8.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.8.7",
+    "sequelize-cli": "^6.2.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.15.0"
+  }
+}

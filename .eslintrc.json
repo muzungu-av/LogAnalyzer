@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:node/recommended"
+  ],
+
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "script"
+  },
+  "env": {
+    "node": true,
+    "commonjs": true
+  },
+  "plugins": ["prettier", "@typescript-eslint", "node"],
+  "rules": {
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-unused-vars": "off",
+    "no-var-requires": "off",
+    "no-empty": "off",
+    "react/prop-types": "off",
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": "off",
+    "no-undef": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {
+        "no-undef": "off",
+        "global-require": "off",
+        "node/no-unsupported-features/es-syntax": [
+          "error",
+          {
+            "version": ">=16.0.0",
+            "ignores": ["modules"]
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
+}
