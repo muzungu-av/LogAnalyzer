@@ -26,7 +26,7 @@ if (!fs.existsSync(logsDir)) {
   fs.mkdirSync(logsDir, { recursive: true });
 }
 
-const fname = "LOGS.db";
+const fname = "LOGS.sqlite";
 
 const logFilePath = path.join(logsDir, fname);
 
