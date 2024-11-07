@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import { Container } from "inversify";
-
 import path from "path";
 import fs from "fs";
 import { createLogger, format, transports } from "winston";
@@ -35,11 +34,13 @@ if (!fs.existsSync(logFilePath)) {
 }
 
 const db = new sqlite3.Database(logFilePath);
+
+//setting up SQLiteTransport for createLogger()
 container
   .bind<SQLiteTransport>("SQLiteTransport")
   .toDynamicValue(() => new SQLiteTransport({ db }))
   .inSingletonScope();
-
+//
 container
   .bind<ILogger>("ILogger")
   .toDynamicValue(() => {
@@ -52,7 +53,7 @@ container
       const sqliteTransport = container.get<SQLiteTransport>("SQLiteTransport");
       logger.add(sqliteTransport);
     }
-    // Установка логгера в LoggerProvider
+    // Setting up static instance
     LoggerProvider.setLogger(logger);
     return logger;
   })

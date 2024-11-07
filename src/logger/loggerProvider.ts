@@ -1,5 +1,6 @@
 import { ILogger } from "../logger/logger.interface";
 
+/* Static instance Logger object */
 export class LoggerProvider {
   private static loggerInstance: ILogger;
 

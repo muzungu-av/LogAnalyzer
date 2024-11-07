@@ -33,18 +33,22 @@ export class SQLiteTransport extends TransportStream {
         }
       );
 
+      /*The idea was to enable support for external keys. But because of the peculiarity of the algorithm - the deepest methods (the last ones)
+        are written to the database first, when there is no parent yet, it will cause an error. That's why we disable it. */
+      this.db.run("PRAGMA foreign_keys = OFF");
+
       this.db.run(
         `CREATE TABLE IF NOT EXISTS performance (
-          id TEXT PRIMARY KEY,                   -- суррогатный ключ
-          clazz         TEXT NOT NULL,           -- Имя текущего класса
-          method_name TEXT NOT NULL,             -- Имя текущей функции
-          caller_clazz TEXT,                     -- Имя вызвавшего класса (может быть NULL)
-          caller_method_name TEXT,               -- Имя вызвавшей функции (может быть NULL)
-          start_time DATETIME NOT NULL,          -- Время начала выполнения функции
-          end_time DATETIME NOT NULL,            -- Время окончания выполнения функции
-          duration REAL,                         -- Длительность
-          parent_id INTEGER,                     -- ID вызвавшей записи (может быть NULL)
-          FOREIGN KEY (parent_id) REFERENCES function_logs(id) ON DELETE CASCADE -- Ограничение внешнего ключа
+          id TEXT PRIMARY KEY,                   -- surrogate key
+          clazz TEXT NOT NULL,                   -- The name of the current class
+          method_name TEXT NOT NULL,             -- Name of the current function
+          caller_clazz TEXT,                     -- Name of the called class (can be NULL)
+          caller_method_name TEXT,               -- Name of the called function (can be NULL)
+          start_time DATETIME NOT NULL,          -- Start time of the function
+          end_time DATETIME NOT NULL,            -- End time of function execution
+          duration REAL,                         -- Duration
+          parent_id INTEGER,                     -- ID of the called record (can be NULL)
+          FOREIGN KEY (parent_id) REFERENCES performance(id) -- Restricting a foreign key to its own table
             )
           `,
         (err) => {

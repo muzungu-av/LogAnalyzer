@@ -25,7 +25,6 @@ export class LoggerService implements ILogger {
     });
   }
 
-  // Implementation of ILogger methods
   info(message: string, meta?: Record<string, unknown>): void {
     message = message + ":-:-:" + this.uid;
     this.logger.info({ level: "info", message, meta });
@@ -40,19 +39,9 @@ export class LoggerService implements ILogger {
     this.logger.error(message, meta);
   }
 
-  /* Метод реализован только для соответствия интерфейсу ILogger */
   log(
     level: string,
     message: string,
     meta?: Record<string, unknown> | undefined
   ): void {}
 }
-
-/*
-    debug: logs debug, info, warn, and error
-    info: logs info, warn, and error
-    warn: logs warn and error
-    error: logs only error
-
-    See  api/src/logger/logger.interface.ts
-  */

@@ -57,9 +57,9 @@ export function TimeTrack(
 
       // information about the previous calling method
       const caller = previousCaller || {
-        className: "None",
-        methodName: "None",
-        uid: "None",
+        className: null,
+        methodName: null,
+        uid: null,
       };
 
       // log in sqlite
